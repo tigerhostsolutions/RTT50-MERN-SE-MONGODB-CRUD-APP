@@ -45,4 +45,14 @@ router.put('/:id', async (req,res)=>{
   }
 })
 
+router.delete('/', async (req,res)=>{
+  try{
+    const deleteFruit = await Fruit.findByIdAndDelete(req.params.id)
+    res.json(deleteFruit)
+  }catch (e) {
+    res.status(500).json({error: e.message})
+  }
+})
+
+
 module.exports = router;
