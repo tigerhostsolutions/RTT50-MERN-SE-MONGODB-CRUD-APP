@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Fruit = require('../models/fruit');
 
+//get all fruits
 router.get('/', async (req, res) => {
   try {
     const allFruit = await Fruit.find({});
@@ -9,18 +10,6 @@ router.get('/', async (req, res) => {
   }
   catch (e) {
     res.status(500).json({errors: e.message});
-  }
-});
-
-//create new fruit
-router.post('/', async (req, res) => {
-  try {
-    const createdFruit = await Fruit.create(req.body);
-    console.log(req.body);
-    res.json(createdFruit);
-  }
-  catch (e) {
-    res.status(500).json({error: e.message});
   }
 });
 
@@ -36,6 +25,19 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+//create new fruit
+router.post('/', async (req, res) => {
+  try {
+    const createdFruit = await Fruit.create(req.body);
+    console.log(req.body);
+    res.json(createdFruit);
+  }
+  catch (e) {
+    res.status(500).json({error: e.message});
+  }
+});
+
+//update fruit
 router.put('/:id', async (req,res)=>{
   try {
     const updatedFruit = await Fruit.findByIdAndUpdate(req.params.id, req.body)
@@ -45,7 +47,8 @@ router.put('/:id', async (req,res)=>{
   }
 })
 
-router.delete('/', async (req,res)=>{
+//delete 1 fruit
+router.delete('/:id', async (req,res)=>{
   try{
     const deleteFruit = await Fruit.findByIdAndDelete(req.params.id)
     res.json(deleteFruit)
@@ -54,5 +57,14 @@ router.delete('/', async (req,res)=>{
   }
 })
 
+//delete all fruit
+router.delete('/', async (req,res)=>{
+  try{
+    const deleteAllFruit = await Fruit.deleteMany({})
+    res.json(deleteAllFruit)
+  }catch (e) {
+    res.status(500).json({error: e.message})
+  }
+})
 
 module.exports = router;
