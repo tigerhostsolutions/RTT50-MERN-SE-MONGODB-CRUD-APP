@@ -19,7 +19,7 @@ app.get('/', (req, res)=> {
 })
 
 //seed route -- populate db with start data
-app.get("/fruits/seeds", async (req, res) => {
+app.get("/fruits/seed", async (req, res) => {
   try {
     await Fruit.deleteMany({});
     await Fruit.create(starterFruits);
