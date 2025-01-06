@@ -6,7 +6,7 @@ const port = process.env.PORT || 5000 // optional, access to env variables
 const conn = require('./config/db')
 conn()
 
-const starterFruits = require("config/seed");
+const starterFruits = require("./config/seed");
 const Fruit = require("./models/fruit");
 const fruitRoutes = require('./routes/fruitRoutes')
 
